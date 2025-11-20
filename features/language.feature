@@ -4,6 +4,7 @@ Feature: Language support
   As a developer for the Behat Extension
   I need to provide test cases for the language support
 
+
   # These test scenarios assume to have a clean installation of the "standard"
   # profile and that the "behat_test" module from the "fixtures/" folder is
   # enabled on the site.
