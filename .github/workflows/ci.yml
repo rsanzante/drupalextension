@@ -25,7 +25,7 @@ jobs:
       - name: docker compose up -d
         run: docker compose up -d
       - name: perms
-        run: chown 1000:1000 -R .
+        run: sudo chown 1000:1000 -R .
       - name: ids
         run: |
           echo "Who am I inside the container?"
