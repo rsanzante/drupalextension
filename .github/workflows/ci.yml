@@ -70,6 +70,8 @@ jobs:
           echo "Behat version"
           docker compose exec -T php vendor/bin/behat -V
 
+          ls -la
+
         shell: bash
 
       - name: behat --profile=blackbox
