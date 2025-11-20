@@ -26,7 +26,7 @@ jobs:
         run: docker compose up -d
 
       - name: 🔐 Fix Git Dubious Ownership
-        run: docker compose exec -u ${DOCKER_USER_ID} -T php git config --global --add safe.directory /var/www/html
+        run: docker compose exec  -T php git config --global --add safe.directory /var/www/html
 
       - name: npm install
         run: docker compose exec -u ${DOCKER_USER_ID} -T -u node node npm install
