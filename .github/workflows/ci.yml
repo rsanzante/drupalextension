@@ -63,16 +63,10 @@ jobs:
         shell: bash
       - name:  Debug Feature File Content (Focus on Line 2)
         run: |
-          echo "Dumping first 64 bytes of feature file..."
-          # Dump the hex to verify Line 1 and the start of Line 2
-          docker compose exec -T php xxd -l 64 features/api_background.feature
+          echo "----behayt.yml.dist----"
+          cat behat.yml.dist
+          echo "----end behayt.yml.dist----"
 
-          echo "---"
-
-          echo "Line 2 (In order to...) in hex:"
-          # Get just Line 2 from the file and dump its hex content
-          # This should be the most revealing command.
-          docker compose exec -T php sh -c "head -n 2 features/api_background.feature | tail -n 1 | xxd -p"
         shell: bash
 
       - name: behat --profile=blackbox
