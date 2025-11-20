@@ -67,7 +67,14 @@ jobs:
           cat behat.yml.dist
           echo "----end behayt.yml.dist----"
 
+          echo "Behat version"
+          docker compose exec -T php vendor/bin/behat -V
+
+          echo "composer.lock"
+          cat composer.lock
+
         shell: bash
+
 
       - name: behat --profile=blackbox
         run: docker compose exec -T php vendor/bin/behat --strict
