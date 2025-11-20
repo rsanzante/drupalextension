@@ -24,6 +24,15 @@ jobs:
         uses: actions/checkout@v3
       - name: docker compose up -d
         run: docker compose up -d
+      - name: ids
+        run: |
+          echo "Who am I inside the container?"
+          docker compose exec -u ${DOCKER_USER_ID} -T php id
+
+          echo "Some ids"
+          docker compose exec -u ${DOCKER_USER_ID} -T php cat /etc/passwd
+
+        shell: bash
       - name: ls
         run: docker compose exec -u ${DOCKER_USER_ID} -T php ls -la
 
