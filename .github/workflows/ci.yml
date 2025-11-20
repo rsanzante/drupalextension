@@ -24,6 +24,10 @@ jobs:
         uses: actions/checkout@v3
       - name: docker compose up -d
         run: docker compose up -d
+
+      - name: 🔐 Fix Git Dubious Ownership
+        run: docker compose exec -T php git config --global --add safe.directory /var/www/html
+
       - name: npm install
         run: docker compose exec -T -u node node npm install
       - name: composer self-update
