@@ -18,12 +18,14 @@ jobs:
     env:
       PHP_VERSION: ${{ matrix.php_version }}
       DRUPAL_VERSION: ${{ matrix.drupal_version }}
-      DOCKER_USER_ID: "1001"
+      DOCKER_USER_ID: "1000"
     steps:
       - name: clone
         uses: actions/checkout@v3
       - name: docker compose up -d
         run: docker compose up -d
+      - name: perms
+        run: chown 1000:1000 -R .
       - name: ids
         run: |
           echo "Who am I inside the container?"
