@@ -70,13 +70,10 @@ jobs:
           echo "Behat version"
           docker compose exec -T php vendor/bin/behat -V
 
-          echo "composer.lock"
-          cat composer.lock
-
         shell: bash
 
       - name: behat --profile=blackbox
-        run: docker compose exec -T php vendor/bin/behat --tags='@blackbox' -fprogress --strict
+        run: docker compose exec -T php vendor/bin/behat --tags='@blackbox' --strict
       - name: behat --profile=drupal9
         if: "${{ matrix.drupal_version == '9'}}"
         run: docker compose exec -T php cat && docker compose exec -T php vendor/bin/behat -fprogress --profile=drupal9 --strict
