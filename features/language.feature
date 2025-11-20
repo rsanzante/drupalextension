@@ -5,5 +5,4 @@ Feature: Lang
   I need
 
   Scenario: Scenario 1
-
     Given I go to "/"
