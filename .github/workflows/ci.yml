@@ -46,7 +46,7 @@ jobs:
         run: docker compose exec -u ${DOCKER_USER_ID} -T php ls -la
 
       - name: npm install
-        run: docker compose exec -u ${DOCKER_USER_ID} -T -u node node npm install
+        run: docker compose exec -T -u node node npm install
       - name: composer version
         run: docker compose exec -u ${DOCKER_USER_ID} -T php composer --version
 
@@ -69,7 +69,7 @@ jobs:
       - name: drush en behat_test
         run: docker compose exec -u ${DOCKER_USER_ID} -T php ./vendor/bin/drush --yes --root=drupal en behat_test
       - name: npm test
-        run: docker compose exec -u ${DOCKER_USER_ID} -T -u node node npm test
+        run: docker compose exec -T -u node node npm test
       - name: composer test
         run: docker compose exec -u ${DOCKER_USER_ID} -T php composer test
       - name: Debug Feature File Content
@@ -107,7 +107,7 @@ jobs:
         run: docker compose exec -u ${DOCKER_USER_ID} -T php cat && docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat -fprogress --profile=drupal9 --strict
       - name: behat --profile=drupal10
         if: "${{ matrix.drupal_version != '9'}}"
-        run: docker compose exec -u ${DOCKER_USER_ID} -T php cat && docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --profile=drupal10 --strict
+        run: docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --profile=drupal10 --strict
       - name: behat --profile=drupal_https
         if: "${{ matrix.drupal_version != '9'}}"
         run: docker compose exec -u ${DOCKER_USER_ID} -T php cat && docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat -fprogress --profile=drupal_https --strict
