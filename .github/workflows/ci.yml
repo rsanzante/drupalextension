@@ -102,6 +102,18 @@ jobs:
 
         shell: bash
 
+      - name: 🧹 Clear Behat/Gherkin Cache
+        # Behat sometimes uses Composer's cache or its own temp files.
+        # Forcing a composer dump-autoload can help reset any compiled file maps.
+        # Running the cache:clear command for the main framework (Drupal) might also help.
+        run: |
+          # 1. Clear Composer's optimized autoloader cache
+          docker compose exec -u ${DOCKER_USER_ID} -T php composer dump-autoload --optimize
+
+          # 2. Clear Drupal's internal cache, as the Behat extension often hooks into it
+          docker compose exec -u ${DOCKER_USER_ID} -T php ./vendor/bin/drush --root=drupal cache:rebuild
+        shell: bash
+
       - name: behat --profile=blackbox
         run: docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --profile=blackbox --strict
 
