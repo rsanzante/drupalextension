@@ -58,13 +58,13 @@ jobs:
         run: docker compose exec -u ${DOCKER_USER_ID} -T php ./vendor/bin/drush --yes --root=drupal pmu page_cache,big_pipe
       - name: drush en behat_test
         run: docker compose exec -u ${DOCKER_USER_ID} -T php ./vendor/bin/drush --yes --root=drupal en behat_test
-      - name: npm test
-        run: docker compose exec -T -u node node npm test
       - name: composer test
         run: docker compose exec -u ${DOCKER_USER_ID} -T php composer test
 
       - name: Prepare general features
         run: ln -s features-all features
+      - name: npm test
+        run: docker compose exec -T -u node node npm test
       - name: behat --profile=blackbox
         run: docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --strict
       - name: behat --profile=drupal9
@@ -85,6 +85,8 @@ jobs:
         run: |
           rm features
           ln -s features-i18n features
+      - name: npm test
+        run: docker compose exec -T -u node node npm test
       - name: behat --profile=blackbox
         run: docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --strict
       - name: behat --profile=drupal9
