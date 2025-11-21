@@ -61,7 +61,8 @@ jobs:
 
       - name: Prepare general features
         run: |
-          ln -s features-all features
+          ls -la
+          sudo ln -s features-all features
           ls -la
       - name: npm test
         run: docker compose exec -T -u node node npm test
@@ -85,8 +86,9 @@ jobs:
 
       - name: Prepare different language features
         run: |
-          rm features
-          ln -s features-i18n features
+          ls -la
+          sudo rm features
+          sudo ln -s features-i18n features
           ls -la
       - name: npm test
         run: docker compose exec -T -u node node npm test
