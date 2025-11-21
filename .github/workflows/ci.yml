@@ -115,7 +115,7 @@ jobs:
         shell: bash
 
       - name: behat --profile=blackbox
-        run: docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --profile=blackbox --strict
+        run: docker compose exec -u ${DOCKER_USER_ID} -T php vendor/bin/behat --strict
 
       - name: behat --profile=drupal9
         if: "${{ matrix.drupal_version == '9'}}"
