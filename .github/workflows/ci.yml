@@ -70,10 +70,8 @@ jobs:
 
       - name: Prepare different language features
         run: |
-          ls -la
           sudo rm features
           sudo ln -s features-i18n features
-          ls -la
       - name: composer test
         run: docker compose exec -u ${DOCKER_USER_ID} -T php composer test
       - name: behat --profile=drupal9
